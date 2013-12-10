@@ -1,3 +1,4 @@
+import math
 import collections
 import sys
 from reportlab.pdfgen import canvas
@@ -5,6 +6,12 @@ from reportlab.lib.units import cm
 
 completed_requests = set()
 previous_sample = ['empty','empty']
+
+def core_mod(x,y):
+	n = math.floor((x+0.01)/y)
+	return(abs(n*y-x))
+
+
 
 print("Content-type:text/html\r\n\r\n")
 print("<HTML><HEAD><TITLE>Corganiser New .cor File</TITLE></HEAD><BODY><H1>Generating corganiser (.cor) file and resulting PDF...</H1>\n")
@@ -97,7 +104,7 @@ for line in open(sys.argv[1]):
 	if line.startswith("hole_name"):
 		hole_name = line.split("=")[1].split("\"")[1].strip(" \n\"")
 	if line.startswith("core_length"):
-		core_length = int(line.split("=")[1].strip(" \n"))	
+		core_length = float(line.split("=")[1].strip(" \n"))	
 	if line.startswith("unsampled_length"):
 		unsampled_length = float(line.split("=")[1].strip(" \n"))	
 	if line.startswith("hole_depth"):
@@ -116,7 +123,10 @@ for line in open(sys.argv[1]):
 		number_of_cores = int(hole_depth / core_length)
 		number_of_sections = int(hole_depth / core_length) * sections_per_core
 		section_length = float(core_length) / float(sections_per_core)
-		if hole_depth % core_length > 0.1:
+		print(str(hole_depth))
+		print(str(core_length))
+		print(str(core_mod(hole_depth,core_length)))
+		if core_mod(hole_depth,core_length) > 0.01:
 			print("Error! Hole depth must be a multiple of core length plus unsampled length.<br>")
 			exit()
 		else:
