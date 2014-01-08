@@ -167,7 +167,7 @@ if "generate" in form:
 	short_filename = filename.split("/")[-1]
 	
 	
-	print("<br>Sampling plan in PDF format: <A HREF=\"" + "/output_files/" + short_filename + ".pdf\">"+short_filename+".pdf</A>")
+	print("<br>Sampling plan in PDF format: <A HREF=\"" + "/output_files/" + short_filename + ".pdf\">"+short_filename+".pdf</A>. For minor edits to this plan try using <a href=http://www.adobe.com/products/illustrator.html>Adobe Illustrator</A> or something else similar.")
 	print("<br>Sampling plan in COR format (for future use by uploading back to this site or use in command line mode): <A HREF=\"" + "/output_files/" + short_filename + "\">"+short_filename+"</A>")
 	print("<br><a href=\"upload_cor_file.py?serverfile=" + short_filename + "\">Reload this sampling plan for editing.</a>")
 	
